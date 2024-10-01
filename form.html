@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-TODOLIST - Form</title>
+    <style>
+        /* Background styling */
+        body {
+            margin: 0;
+            background-image: url('https://png.pngtree.com/background/20210714/original/pngtree-hand-drawn-learning-education-tools-blackboard-background-picture-image_1219834.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh; /* Full height */
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header styling */
+        header {
+            background-color: rgba(255, 255, 255, 0.667); /* Background transparan */
+            padding: 7px;
+            color: rgb(0, 0, 0);
+            height: 100vh;
+            position: fixed;
+            width: 220px;
+        }
+
+        h1 {
+            margin: 0;
+            color: rgb(0, 0, 0);
+            text-align: left;
+            padding-left: 10px; /* Geser teks E-TODOLIST ke kanan */
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav a {
+            display: block;
+            margin: 10px 0;
+            padding: 7px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.731);
+            border-radius: 6px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: rgba(2, 18, 6, 0.8);
+        }
+
+        nav a.active {
+            background-color: rgba(0, 73, 224, 0.8);
+            color: white;
+        }
+
+        /* Form styling */
+        main {
+            margin-left: 260px; /* Geser ke kanan 20px dari sebelumnya */
+            padding: 20px;
+            color: rgb(241, 0, 0);
+            margin-top: 0px; /* Jangan mengubah posisi ke atas */
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            color: black;
+            max-width: 1000px; /* Memperbesar lebar maksimal formulir */
+            margin-left: -24px; /* Mengurangi jarak kiri untuk lebih dekat ke header */
+            margin-top: 4px; /* Tetap sama */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input, textarea {
+            width: calc(100% - 22px); /* Mengurangi lebar input dan textarea untuk padding */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ffffff;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>E-TODOLIST</h1>
+        <nav>
+            <a href="index.html">BERANDA</a>
+            <a href="form.html">FORM</a>
+            <a href="list.html">LIST</a>
+            <a href="developer.html">DEVELOPER</a>
+            <a href="#help.html">HELP</a>
+        </nav>
+    </header>
+
+    <main>
+        <form id="taskForm">
+            <label for="taskName">Nama Tugas:</label>
+            <input type="text" id="taskName" name="taskName" required>
+
+            <label for="taskDescription">Deskripsi Tugas:</label>
+            <textarea id="taskDescription" name="taskDescription" rows="4" required></textarea>
+
+            <label for="givenDate">Tanggal Diberikan:</label>
+            <input type="date" id="givenDate" name="givenDate" required>
+
+            <label for="dueDate">Tanggal Pengumpulan:</label>
+            <input type="date" id="dueDate" name="dueDate" required>
+
+            <label for="taskImage">Gambar Tugas (opsional):</label>
+            <input type="file" id="taskImage" name="taskImage" accept="image/*">
+
+            <button type="submit">Tambahkan Tugas</button>
+        </form>
+    </main>
+
+    <script>
+        // Ambil formulir
+        const form = document.getElementById('taskForm');
+
+        // Fungsi untuk menyimpan tugas ke localStorage
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah reload halaman
+
+            // Ambil nilai dari input
+            const taskName = document.getElementById('taskName').value;
+            const taskDescription = document.getElementById('taskDescription').value;
+            const givenDate = document.getElementById('givenDate').value;
+            const dueDate = document.getElementById('dueDate').value;
+            const taskImage = document.getElementById('taskImage').files[0];
+
+            // Konversi gambar ke Base64 jika ada
+            let reader = new FileReader();
+            reader.onloadend = function() {
+                let imageBase64 = reader.result;
+
+                // Buat objek tugas
+                let task = {
+                    name: taskName,
+                    description: taskDescription,
+                    givenDate: givenDate,
+                    dueDate: dueDate,
+                    image: imageBase64 || null
+                };
+
+                // Simpan tugas ke localStorage
+                let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+                tasks.push(task);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+
+                // Reset form
+                form.reset();
+
+                // Redirect ke halaman list.html untuk melihat daftar tugas
+                window.location.href = 'list.html';
+            };
+
+            if (taskImage) {
+                reader.readAsDataURL(taskImage);
+            } else {
+                reader.onloadend(); // Jika tidak ada gambar, tetap jalankan
+            }
+        });
+    </script>
+</body>
+</html>

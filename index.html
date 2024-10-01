@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-TODOLIST - Beranda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-image: url('https://www.gamelab.id/uploads/news/berita-617-design-latar-belakang-websitemu-agar-lebih-menarik-20210416-064246.jpg');
+            background-size: contain; /* Atau gunakan 100% auto sesuai kebutuhan */
+            background-position: center; /* Pusatkan gambar */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.667);
+            padding: 10px;
+            color: rgb(255, 255, 255);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000; /* Pastikan header selalu di atas */
+            display: flex; /* Menggunakan flexbox */
+            justify-content: space-between; /* Menyebarkan ruang antara elemen */
+            align-items: center; /* Memusatkan item secara vertikal */
+        }
+        h1 {
+            margin: 0;
+            padding-left: 20px; /* Menambahkan padding kiri */
+        }
+        nav {
+            text-align: right; /* Rata kanan */
+            padding-right: 10px; /* Menambahkan padding kanan */
+            margin-left: -15px; /* Menggeser navigasi sedikit ke kiri */
+        }
+        nav a {
+            margin: 0 5px; /* Mengurangi jarak antar tombol */
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            transition: background-color 0.3s, color 0.3s; /* Efek transisi */
+            padding: 5px 10px; /* Menambahkan padding untuk area klik lebih besar */
+            border-radius: 5px; /* Membuat sudut tombol sedikit melengkung */
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Menggelapkan latar belakang saat hover */
+            color: white; /* Warna teks tetap putih */
+        }
+        main {
+            margin-top: 60px; /* Menghindari header */
+            padding: 20px;
+            text-align: center;
+        }
+        section {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 800px;
+            margin: auto;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>E-TODOLIST</h1>
+        <nav>
+            <a href="index.html">BERANDA</a>
+            <a href="form.html">FORM</a>
+            <a href="list.html">LIST</a>
+            <a href="developer.html">DEVELOPER</a>
+            <a href="help.html">HELP</a>
+        </nav>
+    </header>
+</body>
+</html>
